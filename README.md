@@ -11,8 +11,13 @@ The parse function takes an XML string (mandatory) and an object describing the 
 
 	var json = xml2json.parse(xml, options);
 	
-#### parse options
+Or
+
+	var json = xml2json.parse(xml);
+	
+###### parse:options
 *	removeNamespacePrefixes
+	
 	Boolean, defaults to true. Set this to false if you want to retain xml namespace prefixes in the JSON output.
 	
 		var options = { removeNamespacePrefixes: false };
