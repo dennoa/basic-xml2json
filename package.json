@@ -1,0 +1,30 @@
+{
+  "name": "simple-xml2json",
+  "version": "1.0.0",
+  "description": "Simple parser to convert XML strings to JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dennoa/simple-xml2json.git"
+  },
+  "keywords": [
+    "xml"
+  ],
+  "author": "denno",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dennoa/simple-xml2json/issues"
+  },
+  "homepage": "https://github.com/dennoa/simple-xml2json#readme",
+  "devDependencies": {
+    "mocha": "^2.3.4",
+    "should": "^8.0.2"
+  },
+  "dependencies": {
+    "entities": "^1.1.1",
+    "lodash": "^3.10.1"
+  }
+}
