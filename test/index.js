@@ -73,6 +73,15 @@ describe('simple-xml2json', function() {
     done();
   });
 	
+  it('should allow the use of wildcards to replace path elements when getting all content', function(done) {
+    var json = xml2json.parse('<xmldoc><postalAddress><suburb>Brisbane</suburb></postalAddress><billingAddress><suburb>Sydney</suburb></billingAddress></xmldoc>');
+    var suburbs = xml2json.getAllContent(json.root, [xml2json.ANY,'suburb']);
+    suburbs.length.should.equal(2);
+    suburbs[0].should.equal('Brisbane');
+    suburbs[1].should.equal('Sydney');
+    done();
+  });
+	
   it('should get all content for a given path', function(done) {
     var json = xml2json.parse(soapXml);
     var suburbs = xml2json.getAllContent(json.root, ['Body','responseWrapper','responseObject','barry','susan','partyAddress','suburb']);
