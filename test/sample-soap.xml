@@ -17,7 +17,7 @@
             <responseObject>
                 <providerMessage>
                     <type>Warning</type>
-                    <text>Test warning message</text>
+                    <text><![CDATA[Test warning < &amp; message]]></text>
                 </providerMessage>
                 <barry>
                     <effectivePeriod>

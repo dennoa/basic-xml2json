@@ -44,6 +44,11 @@ Get the value of the first matching node under the specified parent node for the
 Or
 	var suburb = xml2json.getContent(json.root, ['Body','Response','Address','Suburb']);
 		
+#### getRawContent
+Just like getContent except that encoded XML values are not decoded.
+
+	var suburb = xml2json.getRawContent(json.root, ['Body','Response','Address','Suburb']);
+		
 #### getAllContent
 Get an array of values for the matching nodes under the specified parent node for the specified path. Encoded XML values will are decoded.
 

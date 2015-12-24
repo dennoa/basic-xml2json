@@ -4,7 +4,7 @@ var should = require('should');
 var xml2json = require('../index.js');
 var fs = require('fs');
 
-describe('simple-xml2json', function() {
+describe('basic-xml2json', function() {
 
 	var soapXml;
 
@@ -96,6 +96,21 @@ describe('simple-xml2json', function() {
     var addr = xml2json.getChildNode(json.root, ['Body','responseWrapper','responseObject','barry','susan','partyAddress']);
     xml2json.getContent(addr, ['addressLine1']).should.equal('123 < 456');
     xml2json.getContent(addr, ['addressLine2']).should.equal('Cnr One & Two');
+    done();
+  });
+	
+  it('should provide access to the encoded xml content', function(done) {
+    var json = xml2json.parse(soapXml);
+    var addr = xml2json.getChildNode(json.root, ['Body','responseWrapper','responseObject','barry','susan','partyAddress']);
+    xml2json.getRawContent(addr, ['addressLine1']).should.equal('123 &lt; 456');
+    xml2json.getRawContent(addr, ['addressLine2']).should.equal('Cnr One &amp; Two');
+    done();
+  });
+	
+  it('should handle CDATA content', function(done) {
+    var json = xml2json.parse(soapXml);
+    xml2json.getContent(json.root, ['Body','responseWrapper','responseObject','providerMessage','text']).should.equal('Test warning < & message');
+    xml2json.getRawContent(json.root, ['Body','responseWrapper','responseObject','providerMessage','text']).should.equal('Test warning < &amp; message');
     done();
   });
   

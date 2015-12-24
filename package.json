@@ -1,6 +1,6 @@
 {
   "name": "basic-xml2json",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Basic parser to convert XML strings to JSON",
   "main": "index.js",
   "scripts": {
