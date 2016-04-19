@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Basic-xml2json by dennoa</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Basic-xml2json</h1>
+        <p>Simple parser to convert XML strings to JSON.</p>
+        <p class="view"><a href="https://github.com/dennoa/basic-xml2json">View the Project on GitHub <small>dennoa/basic-xml2json</small></a></p>
+        <ul>
+          <li><a href="https://github.com/dennoa/basic-xml2json/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/dennoa/basic-xml2json/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/dennoa/basic-xml2json">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="basic-xml2json" class="anchor" href="#basic-xml2json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>basic-xml2json</h1>
+
+<p>Simple parser to convert XML strings to JSON.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<pre><code>var xml2json = require('basic-xml2json');
+</code></pre>
+
+<h4>
+<a id="parse" class="anchor" href="#parse" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>parse</h4>
+
+<p>This code is based off the xml-parser here: <a href="https://github.com/segmentio/xml-parser">https://github.com/segmentio/xml-parser</a>. Please see that page for details of the JSON output.</p>
+
+<p>The parse function takes an XML string (mandatory) and an object describing the options (optional).</p>
+
+<pre><code>var json = xml2json.parse(xml, options);
+</code></pre>
+
+<p>Or</p>
+
+<pre><code>var json = xml2json.parse(xml);
+</code></pre>
+
+<h6>
+<a id="parseoptions" class="anchor" href="#parseoptions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>parse:options</h6>
+
+<ul>
+<li>
+<p>removeNamespacePrefixes</p>
+
+<p>Boolean, defaults to true. Set this to false if you want to retain xml namespace prefixes in the JSON output.</p>
+
+<pre><code>var options = { removeNamespacePrefixes: false };
+</code></pre>
+</li>
+</ul>
+
+<h4>
+<a id="getchildnodes" class="anchor" href="#getchildnodes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getChildNodes</h4>
+
+<p>Get an array of matching nodes under the specified parent node for the specified path.</p>
+
+<pre><code>var json = xml2json.parse(xml);
+var nodes = xml2json.getChildNodes(json.root, ['Body','Response','Address']);
+</code></pre>
+
+<h4>
+<a id="getchildnode" class="anchor" href="#getchildnode" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getChildNode</h4>
+
+<p>Get the first matching node under the specified parent node for the specified path.</p>
+
+<pre><code>var json = xml2json.parse(xml);
+var address = xml2json.getChildNode(json.root, ['Body','Response','Address']);
+</code></pre>
+
+<h4>
+<a id="getcontent" class="anchor" href="#getcontent" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getContent</h4>
+
+<p>Get the value of the first matching node under the specified parent node for the specified path. Encoded XML values will are decoded.</p>
+
+<pre><code>var json = xml2json.parse(xml);
+var address = xml2json.getChildNode(json.root, ['Body','Response','Address']);
+var suburb = xml2json.getContent(address, 'Suburb');
+</code></pre>
+
+<p>Or
+    var suburb = xml2json.getContent(json.root, ['Body','Response','Address','Suburb']);</p>
+
+<h4>
+<a id="getrawcontent" class="anchor" href="#getrawcontent" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getRawContent</h4>
+
+<p>Just like getContent except that encoded XML values are not decoded.</p>
+
+<pre><code>var suburb = xml2json.getRawContent(json.root, ['Body','Response','Address','Suburb']);
+</code></pre>
+
+<h4>
+<a id="getallcontent" class="anchor" href="#getallcontent" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>getAllContent</h4>
+
+<p>Get an array of values for the matching nodes under the specified parent node for the specified path. Encoded XML values will are decoded.</p>
+
+<pre><code>var json = xml2json.parse(xml);
+var suburbs = xml2json.getAllContent(json.root, ['Body','Response','Address','Suburb']);
+</code></pre>
+
+<h4>
+<a id="decodexml" class="anchor" href="#decodexml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>decodeXML</h4>
+
+<p>Decode some text.</p>
+
+<pre><code>var decodedText = decodeXML(text);
+</code></pre>
+
+<h4>
+<a id="encodexml" class="anchor" href="#encodexml" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>encodeXML</h4>
+
+<p>Encode some text.</p>
+
+<pre><code>var encodedText = encodeXML(text);
+</code></pre>
+
+<h4>
+<a id="wildcard-matching" class="anchor" href="#wildcard-matching" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Wildcard Matching</h4>
+
+<p>Probably rarely useful, but if you have a situation where you need to match elements with different paths (but at the same depth) then you can use a wildcard match. For example:</p>
+
+<pre><code>&lt;xmldoc&gt;
+    &lt;postalAddress&gt;
+        &lt;suburb&gt;Brisbane&lt;/suburb&gt;
+    &lt;/postalAddress&gt;
+    &lt;billingAddress&gt;
+        &lt;suburb&gt;Sydney&lt;/suburb&gt;
+    &lt;/billingAddress&gt;
+&lt;/xmldoc&gt;
+
+var json = xml2json.parse(xml);
+var suburbs = xml2json.getAllContent(json.root, [xml2json.ANY, 'suburb']);
+</code></pre>
+
+<p>In this example, suburbs will be ['Brisbane','Sydney'].</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/dennoa">dennoa</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
